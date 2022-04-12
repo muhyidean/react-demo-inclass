@@ -1,0 +1,14 @@
+.Review {
+    display:flex;
+    flex-flow: row wrap;
+
+    margin: 10px;
+    width: 250px;
+    padding: 2px;
+    justify-content: left;
+    text-align: center;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    box-sizing: border-box;
+    cursor: pointer;
+}
