@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import NewProduct from "../../components/NewProduct/NewProduct";
 import ProductDetails from "../../components/ProductDetails/ProductDetails";
 import Products from "../../containers/Products/Products";
@@ -30,26 +30,35 @@ const Dashboard = () => {
         }
     }
 
+    useEffect(() => {
+        return () => {
+          console.log("Something was unmounted");
+        };
+      }, [fetchFlag]);
+
     return (
         <div>
+           
             <ThemeColorContext.Provider value={themeColorState}>
                 <div className="Product">
                     <Products
-                        setSelected={setSelected}
-                        fetchFlag={fetchFlag} />
+                        setSelected={setSelected} 
+                        fetchFlag={fetchFlag}
+                        />
                 </div>
                 <button onClick={reviewColorHandler} >Change color</button>
                 <div >
                     <ProductDetails
                         id={selectedState}
-                        changeFetchFlag={changeFetchFlag}
-                    />
+                        changeFetchFlag={changeFetchFlag}/>
                 </div>
                 <div>
-                    <NewProduct
-                        changeFetchFlag={changeFetchFlag} />
+                <NewProduct changeFetchFlag={changeFetchFlag}/>
+                   {/* {fetchFlag?<NewProduct
+                        changeFetchFlag={changeFetchFlag} />:null}  */}
                 </div>
             </ThemeColorContext.Provider>
+         
         </div>
     );
 

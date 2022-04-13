@@ -1,9 +1,13 @@
 import axios from "axios";
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState, Fragment} from "react";
 import Review from "../Review/Review";
 import './ProductDetails.css';
 
+
 const ProductDetails = (props) => {
+
+
+    console.log("POSTDETAILS UPDATE");
 
     const [productDetail, setProductDetail] = useState({});
 

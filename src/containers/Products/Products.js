@@ -5,6 +5,8 @@ import axios from "axios";
 
 const Products = (props) => {
 
+    console.log("PRODUCTS UPDATE");
+
     const [products, setProducts] = useState(
         [
             { id: 1, name: "iphone 13", price: 1100 },
@@ -38,9 +40,8 @@ const Products = (props) => {
             setSelected={() => { props.setSelected(product.id) }}
         />
     });
-
+ 
     return productList;
-
 }
 
 export default Products;
