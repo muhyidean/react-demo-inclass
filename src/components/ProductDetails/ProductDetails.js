@@ -1,33 +1,34 @@
 import axios from "axios";
-import { useEffect, useState, Fragment} from "react";
+import { useEffect, useState, Fragment } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Review from "../Review/Review";
 import './ProductDetails.css';
 
 
-const ProductDetails = (props) => {
+const ProductDetails = () => {
 
-
-    console.log("POSTDETAILS UPDATE");
-
+    const navigate = useNavigate();
+    const params = useParams();
     const [productDetail, setProductDetail] = useState({});
 
 
     useEffect(
         () => {
-            axios.get('http://localhost:8080/api/v1/products/' + props.id + '/reviews')
-                .then(response => {
-                    setProductDetail(response.data)
-                    console.log("RESPONSE:", response.data)
-                })
-                .catch(err => console.log(err.message))
-        },
-        [props.id])
+            if (params.id) {
+                axios.get('http://localhost:8080/api/v1/products/' + params.id + '/reviews')
+                    .then(response => {
+                        setProductDetail(response.data)
+                    })
+                    .catch(err => console.log(err.message))
+            }
+        }
+        , [params.id])
 
 
     const deleteButtonClicked = (id) => {
-        axios.delete('http://localhost:8080/api/v1/products/' +id)
+        axios.delete('http://localhost:8080/api/v1/products/' + id)
             .then(response => {
-                props.changeFetchFlag();
+                navigate("/");
             })
             .catch(err => {
                 console.error(err);
@@ -38,7 +39,7 @@ const ProductDetails = (props) => {
     const space = <Fragment>&nbsp;&nbsp;</Fragment>;
 
     let productDetailsDisplay = null;
-    if (props.id != 0) {
+    if (params.id) {
 
         productDetailsDisplay = (
 
@@ -53,14 +54,14 @@ const ProductDetails = (props) => {
                     <div style={{ textAlign: "left" }}>
                         {space} Reviews <br />
                         {productDetail.reviews != null ? productDetail.reviews.map(review => {
-                            return <Review comment={review.comment} key={review.id}/>
+                            return <Review comment={review.comment} key={review.id} />
                         }) : null}
                     </div>
 
 
 
                 </div>
-                <button onClick={ () => {deleteButtonClicked(props.id)}}> Delete</button>
+                <button onClick={() => { deleteButtonClicked(params.id) }}> Delete</button>
             </div>
         );
     }

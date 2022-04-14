@@ -1,10 +1,12 @@
 import './NewProduct.css';
 import { useRef } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const NewProduct = (props) => {
 
+    const navigate = useNavigate();
     const newProductForm = useRef();
 
     const addButtonClicked = (e) => {
@@ -16,7 +18,7 @@ const NewProduct = (props) => {
         }
         axios.post('http://localhost:8080/api/v1/products', data)
             .then(response => {
-                props.changeFetchFlag();
+                navigate('/products'); // If you didn't place / it will understand to append
             })
             .catch()
     }
@@ -27,7 +29,7 @@ const NewProduct = (props) => {
                 <h1> Add Product</h1>
 
                 <label>Name</label>
-                <input ref={productName} type="text" label={'name'} name={'name'} />
+                <input  type="text" label={'name'} name={'name'} />
 
                 <label>Price</label>
                 <input type="text" label={'price'} name={'price'} />

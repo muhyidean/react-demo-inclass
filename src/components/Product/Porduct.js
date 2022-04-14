@@ -4,9 +4,8 @@ import { Selected } from "../../store/Selected";
 
 const Product = (props) => {
 
-    const setSelected = useContext(Selected);
     return (
-        <div className="Content" onClick={ () => {setSelected(props.id)}}>
+        <div className="Content" >
             <h1>{props.name}</h1>
             <div className="Field">
                 {props.price}

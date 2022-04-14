@@ -2,6 +2,8 @@ import { useState, useEffect, useContext } from "react";
 import Product from "../../components/Product/Porduct";
 import axios from "axios";
 import { Selected } from "../../store/Selected";
+import { Link } from "react-router-dom";
+import ProductDetails from "../../components/ProductDetails/ProductDetails";
 
 
 const Products = (props) => {
@@ -27,24 +29,29 @@ const Products = (props) => {
             })
     }
 
-    // fetchProducts();    TRY THIS 
     useEffect(() => {
         fetchProducts()
     },
-        [props.fetchFlag]) //ADD THIS LATER - props.fetchFlag
+        [props.fetchFlag])
 
 
     const productList = products.map(product => {
-        return <Product
-            name={product.name}
-            price={product.price}
-            id={product.id}
-            key={product.id}
-            // setSelected={() => { props.setSelected(product.id) }}
-        />
+        return (
+            <Link to={`${product.id}`} key={product.id}>
+                <Product
+                    name={product.name}
+                    price={product.price}
+                    id={product.id}
+                    key={product.id}
+                />
+            </Link>
+        );
     });
- 
-    return productList;
+
+    return <div className="Product">
+        {productList}
+        <ProductDetails />
+    </div>
 }
 
 export default Products;
