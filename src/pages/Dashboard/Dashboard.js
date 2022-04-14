@@ -2,6 +2,7 @@ import React, { useState ,useEffect} from "react";
 import NewProduct from "../../components/NewProduct/NewProduct";
 import ProductDetails from "../../components/ProductDetails/ProductDetails";
 import Products from "../../containers/Products/Products";
+import { Selected } from "../../store/Selected";
 import { ThemeColorContext } from "../../store/ThemeColor";
 
 
@@ -38,11 +39,11 @@ const Dashboard = () => {
 
     return (
         <div>
-           
+           <Selected.Provider value={setSelected} > 
             <ThemeColorContext.Provider value={themeColorState}>
                 <div className="Product">
                     <Products
-                        setSelected={setSelected} 
+                        // setSelected={setSelected} 
                         fetchFlag={fetchFlag}
                         />
                 </div>
@@ -58,7 +59,7 @@ const Dashboard = () => {
                         changeFetchFlag={changeFetchFlag} />:null}  */}
                 </div>
             </ThemeColorContext.Provider>
-         
+            </Selected.Provider>
         </div>
     );
 

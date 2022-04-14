@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Product from "../../components/Product/Porduct";
 import axios from "axios";
+import { Selected } from "../../store/Selected";
 
 
 const Products = (props) => {
+
+    const setSelected = useContext(Selected);
 
     console.log("PRODUCTS UPDATE");
 
@@ -37,7 +40,7 @@ const Products = (props) => {
             price={product.price}
             id={product.id}
             key={product.id}
-            setSelected={() => { props.setSelected(product.id) }}
+            // setSelected={() => { props.setSelected(product.id) }}
         />
     });
  

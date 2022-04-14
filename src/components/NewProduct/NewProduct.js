@@ -7,7 +7,8 @@ const NewProduct = (props) => {
 
     const newProductForm = useRef();
 
-    const addButtonClicked = () => {
+    const addButtonClicked = (e) => {
+        e.preventDefault();
         const form = newProductForm.current;
         const data = {
             name: form['name'].value,
@@ -22,17 +23,16 @@ const NewProduct = (props) => {
 
     return (
         <div className="NewProduct">
-            <form ref={newProductForm}>
+            <form ref={newProductForm} onSubmit={addButtonClicked}>
                 <h1> Add Product</h1>
 
                 <label>Name</label>
-                <input type="text" label={'name'} name={'name'} />
+                <input ref={productName} type="text" label={'name'} name={'name'} />
 
                 <label>Price</label>
                 <input type="text" label={'price'} name={'price'} />
+                <button > Add Product</button>
             </form>
-
-            <button onClick={addButtonClicked} > Add Product</button>
         </div>
     );
 
